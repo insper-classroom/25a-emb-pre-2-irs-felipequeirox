@@ -35,7 +35,6 @@ int main() {
       btn_flag = 0;
     } else {
       gpio_put(LED_PIN, 0);
-      btn_flag = 1;
     }
     sleep_ms(1000);
   }
