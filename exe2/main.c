@@ -4,11 +4,13 @@
 
 const int BTN_PIN_R = 28;
 const int LED_PIN = 4;
-volatile btn_flag;
+volatile int btn_flag;
 
 void btn_callback(uint gpio, uint32_t events) {
-  if (events == GPIO_IRQ_EDGE_FALL) { 
+  if (events == 0x4) { // fall edge
     btn_flag = 1;
+  } else if (events == 0x8) { // rise edge
+    btn_flag = 0;
   }
 }
 
@@ -30,7 +32,6 @@ int main() {
   while (true) {
     if (btn_flag) {
       gpio_put(LED_PIN, 1);
-      btn_flag = 0;
     } else {
       gpio_put(LED_PIN, 0);
     }
