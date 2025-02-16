@@ -5,8 +5,8 @@
 const int BTN_PIN_R = 28;
 const int BTN_PIN_G = 26;
 
-int btn_flag_red = 0;
-int btn_flag_green = 0;
+volatile int btn_flag_red = 0;
+volatile int btn_flag_green = 0;
 
 void btn_callback(uint gpio, uint32_t events) {
   if (events == 0x4) { // fall edge
@@ -39,15 +39,11 @@ int main() {
     if (btn_flag_green) {
       printf("fall green\n");
       btn_flag_green = 0;
-    } else if (!btn_flag_green) {
-      btn_flag_green = 1;
-    }
+    } 
 
     if (btn_flag_red) {
       printf("fall red\n");
       btn_flag_red = 0;
-    } else if (!btn_flag_red) {
-      btn_flag_red = 1;
-    }
+    } 
   }
 }

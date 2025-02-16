@@ -33,6 +33,6 @@ int main() {
 
   while (true) {
     gpio_put(LED_PIN, btn_flag);
-    sleep_ms(1000);
+    sleep_ms(50);
   }
 }
