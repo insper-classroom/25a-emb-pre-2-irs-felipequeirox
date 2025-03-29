@@ -3,13 +3,15 @@
 #include <stdio.h>
 
 const int BTN_PIN_R = 28;
-volatile btn_flag;
+
+volatile int flag_fall;
+volatile int flag_rise;
 
 void btn_callback(uint gpio, uint32_t events) {
   if (events == 0x4) { // fall edge
-    btn_flag = 1;
+    flag_fall = 1;
   } else if (events == 0x8) { // rise edge
-    btn_flag = 0;
+    flag_rise = 1;  
   }
 }
 
@@ -24,13 +26,14 @@ int main() {
       BTN_PIN_R, GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL, true, &btn_callback);
 
   while (true) {
-    if (btn_flag) {
-      printf("fall\n");
-      btn_flag = 0;
-    } else {
-      printf("rise\n");
-      btn_flag = 1;
+    if (flag_fall) {
+      printf("Fall \n");
+      flag_fall = 0;
     }
-    sleep_ms(1000);
+
+    if (flag_rise) {
+      printf("Rise \n");
+      flag_rise = 0;
+    }
   }
 }
