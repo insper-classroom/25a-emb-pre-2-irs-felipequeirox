@@ -27,12 +27,12 @@ int main() {
 
   while (true) {
     if (flag_fall) {
-      printf("Fall \n");
+      printf("fall \n");
       flag_fall = 0;
     }
 
     if (flag_rise) {
-      printf("Rise \n");
+      printf("rise \n");
       flag_rise = 0;
     }
   }
